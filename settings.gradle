@@ -1,1 +1,1 @@
-include ':DesTest', ':DiskCacheDemo'
+include ':DesTest', ':DiskCacheDemo', ':ThreadPoolDemo', ':WebViewDemo'

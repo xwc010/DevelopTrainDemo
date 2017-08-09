@@ -10,6 +10,8 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/DesTest" />
             <option value="$PROJECT_DIR$/DiskCacheDemo" />
+            <option value="$PROJECT_DIR$/ThreadPoolDemo" />
+            <option value="$PROJECT_DIR$/WebViewDemo" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
