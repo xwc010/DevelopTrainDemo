@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/DesTest/DesTest.iml" filepath="$PROJECT_DIR$/DesTest/DesTest.iml" />
       <module fileurl="file://$PROJECT_DIR$/DevelopTrainDemo.iml" filepath="$PROJECT_DIR$/DevelopTrainDemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/DiskCacheDemo/DiskCacheDemo.iml" filepath="$PROJECT_DIR$/DiskCacheDemo/DiskCacheDemo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/NDKDemo/NDKDemo.iml" filepath="$PROJECT_DIR$/NDKDemo/NDKDemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/ThreadPoolDemo/ThreadPoolDemo.iml" filepath="$PROJECT_DIR$/ThreadPoolDemo/ThreadPoolDemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/WebViewDemo/WebViewDemo.iml" filepath="$PROJECT_DIR$/WebViewDemo/WebViewDemo.iml" />
     </modules>

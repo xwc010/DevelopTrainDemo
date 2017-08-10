@@ -52,7 +52,11 @@ public class MainActivity extends AppCompatActivity {
 
                     //更改特定div的css属性
                     String fun2 = "javascript:function hideOther() {"
+                            + "getClass(document,'article_social')[0].style.display='none';"
                             + "getClass(document,'navbar-fixed-top')[0].style.display='none';"
+                            + "getClass(document,'comments')[0].style.display='none';"
+                            + "getClass(document,'footer')[0].style.display='none';"
+                            + "getClass(document,'footer-inner')[0].style.display='none';"
                             + "getClass(document,'article_share_fav')[0].style.display='none';}";
 
                     String fun3 = "javascript:function hideOther() {"

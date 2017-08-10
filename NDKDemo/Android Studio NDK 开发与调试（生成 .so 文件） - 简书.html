@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<!-- saved from url=(0037)http://www.jianshu.com/p/e7c2c63fa70e -->
+<html><!--<![endif]--><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+
+  <!-- Start of Baidu Transcode -->
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta name="applicable-device" content="pc,mobile">
+  <meta name="MobileOptimized" content="width">
+  <meta name="HandheldFriendly" content="true">
+  <meta name="mobile-agent" content="format=html5;url=http://www.jianshu.com/p/e7c2c63fa70e">
+  <!-- End of Baidu Transcode -->
+
+    <meta name="description" content="温馨提示：如果你的 Android Studio 版本在 2.2 以上 ， 建议你用 cMake 的新姿势进行 NDK 开发 : http://www.jianshu.com/p/e03028f826d7我相信你会爱上 cMake 的； 1. 环境搭建 俗话说 “工欲善其事，必先利其器” ；所以咱还是得先下载 ndk；下载地址 ：https://developer.android.com/n...">
+
+  <meta name="360-site-verification" content="604a14b53c6b871206001285921e81d8">
+  <meta property="wb:webmaster" content="294ec9de89e7fadb">
+  <meta property="qc:admins" content="104102651453316562112116375">
+  <meta property="qc:admins" content="11635613706305617">
+  <meta property="qc:admins" content="1163561616621163056375">
+  <meta name="google-site-verification" content="cV4-qkUJZR6gmFeajx_UyPe47GW9vY6cnCrYtCHYNh4">
+  <meta name="google-site-verification" content="HF7lfF8YEGs1qtCE-kPml8Z469e2RHhGajy6JPVy5XI">
+  <meta http-equiv="mobile-agent" content="format=html5; url=http://www.jianshu.com/p/e7c2c63fa70e">
+
+  <!-- Apple -->
+  <meta name="apple-mobile-web-app-title" content="简书">
+
+    <!--  Meta for Smart App Banner -->
+  <meta name="apple-itunes-app" content="app-id=888237539, app-argument=jianshu://notes/7454722">
+  <!-- End -->
+
+  <!--  Meta for Twitter Card -->
+  <meta content="summary" property="twitter:card">
+  <meta content="@jianshucom" property="twitter:site">
+  <meta content="Android Studio NDK 开发与调试（生成 .so 文件）" property="twitter:title">
+  <meta content="温馨提示：如果你的 Android Studio 版本在 2.2 以上 ， 建议你用 cMake 的新姿势进行 NDK 开发 : http://www.jianshu.com/p/e03028f826d7我相信你会爱上 cMake 的； 1. 环境搭建 俗话说 “工欲善其事，必先利其器” ；所以咱还是得先下载 ndk；下载地址 ：https://developer.android.com/ndk/downloads/index.html(需要翻墙，你懂得)或者可以直接在 Android Studio 里面下载，这就可以免去翻墙，File--&gt;Project Structure 如果你已经..." property="twitter:description">
+  <meta content="http://www.jianshu.com/p/e7c2c63fa70e" property="twitter:url">
+  <!-- End -->
+
+  <!--  Meta for OpenGraph -->
+  <meta property="fb:app_id" content="865829053512461">
+  <meta property="og:site_name" content="简书">
+  <meta property="og:title" content="Android Studio NDK 开发与调试（生成 .so 文件）">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="http://www.jianshu.com/p/e7c2c63fa70e">
+  <meta property="og:description" content="温馨提示：如果你的 Android Studio 版本在 2.2 以上 ， 建议你用 cMake 的新姿势进行 NDK 开发 : http://www.jianshu.com/p/e03028f...">
+  <!-- End -->
+
+  <!--  Meta for Facebook Applinks -->
+  <meta property="al:ios:url" content="jianshu://notes/7454722">
+  <meta property="al:ios:app_store_id" content="888237539">
+  <meta property="al:ios:app_name" content="简书">
+
+  <meta property="al:android:url" content="jianshu://notes/7454722">
+  <meta property="al:android:package" content="com.jianshu.haruki">
+  <meta property="al:android:app_name" content="简书">
+  <!-- End -->
+
+
+    <title>Android Studio NDK 开发与调试（生成 .so 文件） - 简书</title>
+
+  <meta name="csrf-param" content="authenticity_token">
+<meta name="csrf-token" content="llmAcFLFVDDJo4SCXrqPknU6G/KxO46x4dnx31P7mswvGhH4SCPEo4odNle0n8i3Y3JqnKZBhOgiqiuD9wuz1A==">
+
+  <link rel="stylesheet" media="all" href="./Android Studio NDK 开发与调试（生成 .so 文件） - 简书_files/web-e4c0b63e25c3fd5f4ef2.css">
+  
+  <link rel="stylesheet" media="all" href="./Android Studio NDK 开发与调试（生成 .so 文件） - 简书_files/entry-e4c0b63e25c3fd5f4ef2.css">
+
+  <link href="http://cdn2.jianshu.io/assets/favicons/favicon-783beb88ed621ceab614de960376ac0c.ico" rel="icon">
+      <link rel="apple-touch-icon-precomposed" href="http://cdn2.jianshu.io/assets/apple-touch-icons/57-47624b2e2161e8eb144462c85db0a5ff.png" sizes="57x57">
+      <link rel="apple-touch-icon-precomposed" href="http://cdn2.jianshu.io/assets/apple-touch-icons/72-c00cde7cf98fc49e50cbb3ee1dcd5804.png" sizes="72x72">
+      <link rel="apple-touch-icon-precomposed" href="http://cdn2.jianshu.io/assets/apple-touch-icons/76-e8af0bdeaf1ba31e303b1fde8b5e66c4.png" sizes="76x76">
+      <link rel="apple-touch-icon-precomposed" href="http://cdn2.jianshu.io/assets/apple-touch-icons/114-f4c78569bbf1977e8382a5fd90c9237a.png" sizes="114x114">
+      <link rel="apple-touch-icon-precomposed" href="http://cdn2.jianshu.io/assets/apple-touch-icons/120-cf10c3711dba269522743729efe66bbc.png" sizes="120x120">
+      <link rel="apple-touch-icon-precomposed" href="http://cdn2.jianshu.io/assets/apple-touch-icons/152-7bd60457b5f3ecbf1343f0e6241be4f8.png" sizes="152x152">
+<link rel="stylesheet" href="blob:http://www.jianshu.com/0a6d81fe-a1f4-46f1-8ca9-b6ccad139a52"></head>
+
+  <body lang="zh-CN" class="reader-black-font">
+    <!-- 全局顶部导航栏 -->
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <div class="width-limit">
+    <!-- 左上方 Logo -->
+    <a class="logo" href="http://www.jianshu.com/"><img src="./Android Studio NDK 开发与调试（生成 .so 文件） - 简书_files/logo-58fd04f6f0de908401aa561cda6a0688.png" alt="Logo"></a>
+
+    <!-- 右上角 -->
+      <!-- 登录显示写文章 -->
+      <a class="btn write-btn" target="_blank" href="http://www.jianshu.com/writer#/">
+        <i class="iconfont ic-write"></i>写文章
+</a>
+    <!-- 如果用户登录，显示下拉菜单 -->
+      <div class="user">
+        <div data-hover="dropdown">
+          <a class="avatar" href="http://www.jianshu.com/u/50fde98da15e"><img src="./Android Studio NDK 开发与调试（生成 .so 文件） - 简书_files/ecabe6dd-fd9f-40db-b6a4-46b0bdff2a42.png" alt="120"></a>
+        </div>
+        <ul class="dropdown-menu">
+          <li>
+            <a href="http://www.jianshu.com/u/50fde98da15e">
+              <i class="iconfont ic-navigation-profile"></i><span>我的主页</span>
+</a>          </li>
+          <li>
+            <!-- TODO bookmarks_path -->
+            <a href="http://www.jianshu.com/bookmarks">
+              <i class="iconfont ic-navigation-mark"></i><span>收藏的文章</span>
+</a>          </li>
+          <li>
+            <a href="http://www.jianshu.com/users/50fde98da15e/liked_notes">
+              <i class="iconfont ic-navigation-like"></i><span>喜欢的文章</span>
+</a>          </li>
+          <li>
+            <a href="http://www.jianshu.com/wallet">
+              <i class="iconfont ic-navigation-wallet"></i><span>我的钱包</span>
+</a>          </li>
+          <li>
+            <a href="http://www.jianshu.com/settings">
+              <i class="iconfont ic-navigation-settings"></i><span>设置</span>
+</a>          </li>
+          <li>
+            <a href="http://www.jianshu.com/faqs">
+              <i class="iconfont ic-navigation-feedback"></i><span>帮助与反馈</span>
+</a>          </li>
+          <li>
+            <a rel="nofollow" data-method="delete" href="http://www.jianshu.com/sign_out">
+              <i class="iconfont ic-navigation-signout"></i><span>退出</span>
+</a>          </li>
+        </ul>
+      </div>
+
+    <div class="style-mode"><a class="style-mode-btn"><i class="iconfont ic-navigation-mode"></i></a> <div class="popover-modal" style="left: 0px; display: none;"><div class="meta"><i class="iconfont ic-navigation-night"></i><span>夜间模式</span></div> <div class="switch day-night-group"><a class="switch-btn">开</a> <a class="switch-btn active">关</a></div> <hr> <div class="switch font-family-group"><a class="switch-btn font-song">宋体</a> <a class="switch-btn font-hei active">黑体</a></div> <div class="switch"><a class="switch-btn active">简</a> <a class="switch-btn">繁</a></div></div></div>
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu" aria-expanded="false">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+      <div class="collapse navbar-collapse" id="menu">
+        <ul class="nav navbar-nav">
+            <li class="">
+              <a href="http://www.jianshu.com/">
+                <span class="menu-text">发现</span><i class="iconfont ic-navigation-discover menu-icon"></i>
+</a>            </li>
+            <li class="">
+              <a href="http://www.jianshu.com/subscriptions">
+                <span class="menu-text">关注</span><i class="iconfont ic-navigation-follow menu-icon"></i>
+</a>            </li>
+            <li class="notification"><a data-hover="dropdown" href="http://www.jianshu.com/notifications" class="notification-btn"><span class="menu-text">消息</span> <i class="iconfont ic-navigation-notification menu-icon"></i> <!----> <span class="badge">18</span></a> <ul class="dropdown-menu"><li><a href="http://www.jianshu.com/notifications#/comments"><i class="iconfont ic-comments"></i> <span>评论</span> <!----></a></li><li><a href="http://www.jianshu.com/notifications#/chats"><i class="iconfont ic-chats"></i> <span>简信</span> <span class="badge">2</span></a></li><li><a href="http://www.jianshu.com/notifications#/requests"><i class="iconfont ic-requests"></i> <span>投稿请求</span> <!----></a></li><li><a href="http://www.jianshu.com/notifications#/likes"><i class="iconfont ic-likes"></i> <span>喜欢和赞</span> <span class="badge">2</span></a></li><li><a href="http://www.jianshu.com/notifications#/follows"><i class="iconfont ic-follows"></i> <span>关注</span> <span class="badge">2</span></a></li><li><a href="http://www.jianshu.com/notifications#/money"><i class="iconfont ic-money"></i> <span>赞赏</span> <!----></a></li><li><a href="http://www.jianshu.com/notifications#/others"><i class="iconfont ic-others"></i> <span>其他消息</span> <span class="badge">12</span></a></li></ul></li>
+          <li class="search">
+            <form target="_blank" action="http://www.jianshu.com/search" accept-charset="UTF-8" method="get"><input name="utf8" type="hidden" value="✓">
+              <input type="text" name="q" id="q" value="" autocomplete="off" placeholder="搜索" class="search-input">
+              <a class="search-btn" href="javascript:void(null)"><i class="iconfont ic-search"></i></a>
+</form>          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
+
+    
+<div class="note">
+  <div class="post">
+    <div class="article">
+        <h1 class="title">Android Studio NDK 开发与调试（生成 .so 文件）</h1>
+
+        <!-- 作者区域 -->
+        <div class="author">
+          <a class="avatar" href="http://www.jianshu.com/u/55b179b355c8">
+            <img src="./Android Studio NDK 开发与调试（生成 .so 文件） - 简书_files/67dd2048659e.jpg" alt="144">
+</a>          <div class="info">
+            <span class="tag">作者</span>
+            <span class="name"><a href="http://www.jianshu.com/u/55b179b355c8">jarylan</a></span>
+            <!-- 关注用户按钮 -->
+            <a class="btn btn-default following"><i class="iconfont ic-followed"></i><span>已关注</span></a>
+            <!-- 文章数据信息 -->
+            <div class="meta">
+              <!-- 如果文章更新时间大于发布时间，那么使用 tooltip 显示更新时间 -->
+                <span class="publish-time" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="最后编辑于 2017.02.08 16:46">2016.12.16 19:52*</span>
+              <span class="wordage">字数 820</span>
+            <span class="views-count">阅读 5385</span><span class="comments-count">评论 2</span><span class="likes-count">喜欢 15</span></div>
+          </div>
+          <!-- 如果是当前作者，加入编辑按钮 -->
+        </div>
+        <!-- -->
+
+        <!-- 文章内容 -->
+        <div data-note-content="" class="show-content">
+          <p>温馨提示：如果你的 Android Studio 版本在 2.2 以上 ， 建议你用 cMake 的新姿势进行 NDK 开发 : <a href="http://www.jianshu.com/p/e03028f826d7" target="_blank">http://www.jianshu.com/p/e03028f826d7</a><br>我相信你会爱上 cMake 的；</p>
+<h6>1. 环境搭建</h6>
+<p>俗话说 “工欲善其事，必先利其器” ；所以咱还是得先下载 ndk；<br>下载地址 ：<a href="https://developer.android.com/ndk/downloads/index.html" target="_blank">https://developer.android.com/ndk/downloads/index.html</a>(需要翻墙，你懂得)<br>或者可以直接在 Android Studio 里面下载，这就可以免去翻墙，<br>File--&gt;Project Structure<br></p><div class="image-package">
+<img src="./Android Studio NDK 开发与调试（生成 .so 文件） - 简书_files/3878387-b385baab12b75c73.png" data-original-src="http://upload-images.jianshu.io/upload_images/3878387-b385baab12b75c73.png?imageMogr2/auto-orient/strip%7CimageView2/2" style="cursor: zoom-in;"><br><div class="image-caption">image1.png</div>
+</div><p><br>如果你已经下载，直接选择你 ndk 的位置；<br>如果没有下载，在红色框这个位置会有位置提示你下载，点击下载就行；<br>添加 ndk 后你会在 local.properties 这个文件看到（路径取决于你 ndk 的位置）：<br></p><div class="image-package">
+<img src="./Android Studio NDK 开发与调试（生成 .so 文件） - 简书_files/3878387-675897aafae1c61a.png" data-original-src="http://upload-images.jianshu.io/upload_images/3878387-675897aafae1c61a.png?imageMogr2/auto-orient/strip%7CimageView2/2" style="cursor: zoom-in;"><br><div class="image-caption">image2.png</div>
+</div><p><br>莫慌，还差最后一步：<br></p><div class="image-package">
+<img src="./Android Studio NDK 开发与调试（生成 .so 文件） - 简书_files/3878387-44c83fbc26313850.png" data-original-src="http://upload-images.jianshu.io/upload_images/3878387-44c83fbc26313850.png?imageMogr2/auto-orient/strip%7CimageView2/2" style="cursor: zoom-in;"><br><div class="image-caption">image3.png</div>
+</div><p><br>在此处加上这句代码：android.useDeprecatedNdk=true<br>好了，ndk 环境搭建完毕！</p>
+<h6>2. java 代码与 c 代码编写</h6>
+<p>  首先新建个 java 类</p>
+<pre class="hljs undefined"><code>public class JniTest{
+    static {
+        System.loadLibrary("jary");
+    }
+    public native String getString();
+}</code></pre>
+<p>然后重新编译下你的 Project： Build--&gt;Make Project（Ctrl+F9）<br>重新编译之后就可以在对应的文件夹看到编译后的 JniTest.class<br>C:\ASworkspace\MyJniTest\app\build\intermediates\classes\debug\jary\com\myjnitest<br></p><div class="image-package">
+<img src="./Android Studio NDK 开发与调试（生成 .so 文件） - 简书_files/3878387-574a01073cd00517.png" data-original-src="http://upload-images.jianshu.io/upload_images/3878387-574a01073cd00517.png?imageMogr2/auto-orient/strip%7CimageView2/2" style="cursor: zoom-in;"><br><div class="image-caption">image4.png</div>
+</div><p><br>下一步来看怎么生成 .h 的文件<br>在 studio 打开 Terminal 命令行工具，打开步骤是 View--&gt;Tool Windows--&gt;Terminal （Alt+F12）</p>
+<p>在命令行中先进入到工程的 main 目录下<br>输入命令：javah -d jni -classpath 自己编译后的 class 文件的绝对路径<br>例如：javah -d jni -classpath<br>C:\ASworkspace\MyJniTest\app\build\intermediates\classes\debug jary.com.myjnitest.JniTest<br>注意 debug 后面是有个空格的，如图：</p>
+<div class="image-package">
+<img src="./Android Studio NDK 开发与调试（生成 .so 文件） - 简书_files/3878387-5e54783e476efd12.png" data-original-src="http://upload-images.jianshu.io/upload_images/3878387-5e54783e476efd12.png?imageMogr2/auto-orient/strip%7CimageView2/2" style="cursor: zoom-in;"><br><div class="image-caption">image5.png</div>
+</div><p><br>命令执行后会在 main 目录下(在哪个目录下执行就会在哪个目录下生成 .h 文件)自动生成 “jni” 文件夹，同时生成一个 .h 的文件</p>
+<div class="image-package">
+<img src="./Android Studio NDK 开发与调试（生成 .so 文件） - 简书_files/3878387-a5f6f39727c4db46.png" data-original-src="http://upload-images.jianshu.io/upload_images/3878387-a5f6f39727c4db46.png?imageMogr2/auto-orient/strip%7CimageView2/2" style="cursor: zoom-in;"><br><div class="image-caption">imag6.png</div>
+</div>
+<p>这个 .h 文件可不做修改 ；默认就行<br>现在我们来写一个测试的 C 文件 jary.c 同 .h 文件一样放到 jni 文件夹下，代码如下：<br></p><div class="image-package">
+<img src="./Android Studio NDK 开发与调试（生成 .so 文件） - 简书_files/3878387-d8b34969fb7d91b9.png" data-original-src="http://upload-images.jianshu.io/upload_images/3878387-d8b34969fb7d91b9.png?imageMogr2/auto-orient/strip%7CimageView2/2" style="cursor: zoom-in;"><br><div class="image-caption">image7.png</div>
+</div>
+<p>依赖刚才生成的 .h 头文件 ； 方法名与 .h 里面方法名保持一致 ；<br>最后在 build.gradle defaultConfig 中添加如下代码</p>
+<pre class="hljs undefined"><code> ndk {   
+        moduleName "jary"         //生成的so名字    
+        abiFilters "armeabi", "armeabi-v7a", "x86"  //输出指定三种abi体系结构下的so库。    
+        stl "stlport_static"    //打开.c 的 debug , 下面第 4 点会讲到
+      }</code></pre>
+<p>到这里，jni 调 C 就完成了，现在我们来测试一下，写个 TextView 显示一下调用的 C：</p>
+<pre class="hljs undefined"><code>public class MainActivity extends AppCompatActivity {
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+    TextView tvJni = (TextView) findViewById(R.id.tvJni);
+    tvJni.setText(new JniTest().getString());
+}
+}</code></pre>
+<p>效果如下图 ：<br></p><div class="image-package">
+<img src="./Android Studio NDK 开发与调试（生成 .so 文件） - 简书_files/3878387-8984ce7b799defa1.png" data-original-src="http://upload-images.jianshu.io/upload_images/3878387-8984ce7b799defa1.png?imageMogr2/auto-orient/strip%7CimageView2/2" style="cursor: zoom-in;"><br><div class="image-caption">image8.png</div>
+</div>
+<h6>3. 生成 .so 以及调用</h6>
+<p>编译后的 .so 文件如下图路径：</p>
+<div class="image-package">
+<img src="./Android Studio NDK 开发与调试（生成 .so 文件） - 简书_files/3878387-f227e3f7abde6515.png" data-original-src="http://upload-images.jianshu.io/upload_images/3878387-f227e3f7abde6515.png?imageMogr2/auto-orient/strip%7CimageView2/2" style="cursor: zoom-in;"><br><div class="image-caption">image9.png</div>
+</div>
+<p>根据这个路径就可以找到指定输出的三种体系结构下的 .so 文件，然后把 .so 文件复制出来，如下图所示的放到 jniLibs 文件夹下面，如下图：</p>
+<div class="image-package">
+<img src="./Android Studio NDK 开发与调试（生成 .so 文件） - 简书_files/3878387-735806320bd45c8d.png" data-original-src="http://upload-images.jianshu.io/upload_images/3878387-735806320bd45c8d.png?imageMogr2/auto-orient/strip%7CimageView2/2" style="cursor: zoom-in;"><br><div class="image-caption">image10.png</div>
+</div>
+<blockquote><p><strong>注意：</strong>  放到 jniLibs 文件夹下面，build.gradle 里面什么都可以不用配置</p></blockquote>
+<p>还有一种方式是将 .so 文件 放在 libs 文件夹下面，注意在 build.gradle 添加如下配置:</p>
+<div class="image-package">
+<img src="./Android Studio NDK 开发与调试（生成 .so 文件） - 简书_files/3878387-9852dc6269f66dd4.png" data-original-src="http://upload-images.jianshu.io/upload_images/3878387-9852dc6269f66dd4.png?imageMogr2/auto-orient/strip%7CimageView2/2" style="cursor: zoom-in;"><br><div class="image-caption">iamge11.png</div>
+</div>
+<h6>4. 关于ndk开发在 .c 文件里面的 debug</h6>
+<p>首先在 build.gradle 中添加如下代码 ：</p>
+<pre class="hljs undefined"><code>android {
+    ... ...
+  defaultConfig {
+      ... ...
+     ndk {   
+        moduleName "jary"         //生成的so名字    
+        abiFilters "armeabi", "armeabi-v7a", "x86"  //输出指定三种abi体系结构下的so库。    
+        stl "stlport_static"    //打开.c 的 debug （此句是打开的debug的关键）
+     }
+  }
+  buildTypes {
+     debug {    
+            jniDebuggable true //此句不加在真机上 debug 不受影响，但是在虚拟机上不能 debug
+     }
+  }</code></pre>
+<p>配置后如下图 ，会出现一个 app-native，选择此项你就可以尽情的 debug 了：</p>
+<div class="image-package">
+<img src="./Android Studio NDK 开发与调试（生成 .so 文件） - 简书_files/3878387-0c1d36a3a9f2d5df.png" data-original-src="http://upload-images.jianshu.io/upload_images/3878387-0c1d36a3a9f2d5df.png?imageMogr2/auto-orient/strip%7CimageView2/2" style="cursor: zoom-in;"><br><div class="image-caption">image12.png</div>
+</div>
+<p>debug 如下图：<br></p><div class="image-package">
+<img src="./Android Studio NDK 开发与调试（生成 .so 文件） - 简书_files/3878387-5acb22ff62d4befe.png" data-original-src="http://upload-images.jianshu.io/upload_images/3878387-5acb22ff62d4befe.png?imageMogr2/auto-orient/strip%7CimageView2/2" style="cursor: zoom-in;"><br><div class="image-caption">image13.png</div>
+</div>
+
+        </div>
+        <!--  -->
+
+        <div class="show-foot">
+          <a class="notebook" href="http://www.jianshu.com/nb/8035677">
+            <i class="iconfont ic-search-notebook"></i> <span>Android</span>
+</a>          <div class="copyright" data-toggle="tooltip" data-html="true" data-original-title="转载请联系作者获得授权，并标注“简书作者”。">
+            © 著作权归作者所有
+          </div>
+          <div class="modal-wrap" data-report-note="">
+            <a id="report-modal">举报文章</a>
+          </div>
+        </div>
+    </div>
+
+    <!-- 文章底部作者信息 -->
+      <div class="follow-detail">
+        <div class="info">
+          <a class="avatar" href="http://www.jianshu.com/u/55b179b355c8">
+            <img src="./Android Studio NDK 开发与调试（生成 .so 文件） - 简书_files/67dd2048659e.jpg" alt="144">
+</a>          <a class="btn btn-default following"><i class="iconfont ic-followed"></i><span>已关注</span></a>
+          <a class="title" href="http://www.jianshu.com/u/55b179b355c8">jarylan</a>
+        <p>写了 2915 字，被 24 人关注，获得了 56 个喜欢</p></div>
+          <div class="signature">Android ， java ；
+www.jarylan.com
+</div>
+      </div>
+
+      <div class="support-author"><p>如果觉得我的文章对您有用，请随意赞赏。您的支持将鼓励我继续创作！</p> <div class="btn btn-pay">赞赏支持</div> <!----> <!----> <!----></div>
+
+    <div class="meta-bottom">
+      <div class="like"><div class="btn like-group"><div class="btn-like"><a><i class="iconfont ic-like"></i>喜欢</a></div> <div class="modal-wrap"><a>15</a></div></div> <!----></div>
+      <div class="share-group">
+        <a class="share-circle" data-action="weixin-share" data-toggle="tooltip" data-original-title="分享到微信">
+          <i class="iconfont ic-wechat"></i>
+        </a>
+        <a class="share-circle" data-action="weibo-share" data-toggle="tooltip" href="javascript:void((function(s,d,e,r,l,p,t,z,c){var%20f=&#39;http://v.t.sina.com.cn/share/share.php?appkey=1881139527&#39;,u=z||d.location,p=[&#39;&amp;url=&#39;,e(u),&#39;&amp;title=&#39;,e(t||d.title),&#39;&amp;source=&#39;,e(r),&#39;&amp;sourceUrl=&#39;,e(l),&#39;&amp;content=&#39;,c||&#39;gb2312&#39;,&#39;&amp;pic=&#39;,e(p||&#39;&#39;)].join(&#39;&#39;);function%20a(){if(!window.open([f,p].join(&#39;&#39;),&#39;mb&#39;,[&#39;toolbar=0,status=0,resizable=1,width=440,height=430,left=&#39;,(s.width-440)/2,&#39;,top=&#39;,(s.height-430)/2].join(&#39;&#39;)))u.href=[f,p].join(&#39;&#39;);};if(/Firefox/.test(navigator.userAgent))setTimeout(a,0);else%20a();})(screen,document,encodeURIComponent,&#39;&#39;,&#39;&#39;,&#39;http://cwb.assets.jianshu.io/notes/images/7454722/weibo/image_d887e79c6717.jpg&#39;, &#39;推荐 jarylan 的文章《Android Studio NDK 开发与调试（生成 .so 文件）》（ 分享自 @简书 ）&#39;,&#39;http://www.jianshu.com/p/e7c2c63fa70e?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=reader_share&amp;utm_source=weibo&#39;,&#39;页面编码gb2312|utf-8默认gb2312&#39;));" data-original-title="分享到微博">
+          <i class="iconfont ic-weibo"></i>
+        </a>
+          <a class="share-circle" data-toggle="tooltip" href="http://cwb.assets.jianshu.io/notes/images/7454722/weibo/image_d887e79c6717.jpg" target="_blank" data-original-title="下载长微博图片">
+            <i class="iconfont ic-picture"></i>
+          </a>
+        <a class="share-circle more-share" tabindex="0" data-toggle="popover" data-placement="top" data-html="true" data-trigger="focus" href="javascript:void(0);" data-content="
+          &lt;ul class=&quot;share-list&quot;&gt;
+            &lt;li&gt;&lt;a href=&quot;javascript:void(function(){var d=document,e=encodeURIComponent,r=&#39;http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=&#39;+e(&#39;http://www.jianshu.com/p/e7c2c63fa70e?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=reader_share&amp;utm_source=qzone&#39;)+&#39;&amp;title=&#39;+e(&#39;推荐 jarylan 的文章《Android Studio NDK 开发与调试（生成 .so 文件）》&#39;),x=function(){if(!window.open(r,&#39;qzone&#39;,&#39;toolbar=0,resizable=1,scrollbars=yes,status=1,width=600,height=600&#39;))location.href=r};if(/Firefox/.test(navigator.userAgent)){setTimeout(x,0)}else{x()}})();&quot;&gt;&lt;i class=&quot;social-icon-sprite social-icon-zone&quot;&gt;&lt;/i&gt;&lt;span&gt;分享到QQ空间&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&quot;javascript:void(function(){var d=document,e=encodeURIComponent,r=&#39;https://twitter.com/share?url=&#39;+e(&#39;http://www.jianshu.com/p/e7c2c63fa70e?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=reader_share&amp;utm_source=twitter&#39;)+&#39;&amp;text=&#39;+e(&#39;推荐 jarylan 的文章《Android Studio NDK 开发与调试（生成 .so 文件）》（ 分享自 @jianshucom ）&#39;)+&#39;&amp;related=&#39;+e(&#39;jianshucom&#39;),x=function(){if(!window.open(r,&#39;twitter&#39;,&#39;toolbar=0,resizable=1,scrollbars=yes,status=1,width=600,height=600&#39;))location.href=r};if(/Firefox/.test(navigator.userAgent)){setTimeout(x,0)}else{x()}})();&quot;&gt;&lt;i class=&quot;social-icon-sprite social-icon-twitter&quot;&gt;&lt;/i&gt;&lt;span&gt;分享到Twitter&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&quot;javascript:void(function(){var d=document,e=encodeURIComponent,r=&#39;https://www.facebook.com/dialog/share?app_id=483126645039390&amp;display=popup&amp;href=http://www.jianshu.com/p/e7c2c63fa70e?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=reader_share&amp;utm_source=facebook&#39;,x=function(){if(!window.open(r,&#39;facebook&#39;,&#39;toolbar=0,resizable=1,scrollbars=yes,status=1,width=450,height=330&#39;))location.href=r};if(/Firefox/.test(navigator.userAgent)){setTimeout(x,0)}else{x()}})();&quot;&gt;&lt;i class=&quot;social-icon-sprite social-icon-facebook&quot;&gt;&lt;/i&gt;&lt;span&gt;分享到Facebook&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&quot;javascript:void(function(){var d=document,e=encodeURIComponent,r=&#39;https://plus.google.com/share?url=&#39;+e(&#39;http://www.jianshu.com/p/e7c2c63fa70e?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=reader_share&amp;utm_source=google_plus&#39;),x=function(){if(!window.open(r,&#39;google_plus&#39;,&#39;toolbar=0,resizable=1,scrollbars=yes,status=1,width=450,height=330&#39;))location.href=r};if(/Firefox/.test(navigator.userAgent)){setTimeout(x,0)}else{x()}})();&quot;&gt;&lt;i class=&quot;social-icon-sprite social-icon-google&quot;&gt;&lt;/i&gt;&lt;span&gt;分享到Google+&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&quot;javascript:void(function(){var d=document,e=encodeURIComponent,s1=window.getSelection,s2=d.getSelection,s3=d.selection,s=s1?s1():s2?s2():s3?s3.createRange().text:&#39;&#39;,r=&#39;http://www.douban.com/recommend/?url=&#39;+e(&#39;http://www.jianshu.com/p/e7c2c63fa70e?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=reader_share&amp;utm_source=douban&#39;)+&#39;&amp;title=&#39;+e(&#39;Android Studio NDK 开发与调试（生成 .so 文件）&#39;)+&#39;&amp;sel=&#39;+e(s)+&#39;&amp;v=1&#39;,x=function(){if(!window.open(r,&#39;douban&#39;,&#39;toolbar=0,resizable=1,scrollbars=yes,status=1,width=450,height=330&#39;))location.href=r+&#39;&amp;r=1&#39;};if(/Firefox/.test(navigator.userAgent)){setTimeout(x,0)}else{x()}})()&quot;&gt;&lt;i class=&quot;social-icon-sprite social-icon-douban&quot;&gt;&lt;/i&gt;&lt;span&gt;分享到豆瓣&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        " data-original-title="" title="">更多分享</a>
+      </div>
+    </div>
+    <div><div id="comment-list" class="comment-list"><div><form class="new-comment"><a class="avatar"><img src="./Android Studio NDK 开发与调试（生成 .so 文件） - 简书_files/ecabe6dd-fd9f-40db-b6a4-46b0bdff2a42(1).png"></a> <textarea placeholder="写下你的评论..."></textarea> <!----></form></div> <div id="normal-comment-list" class="normal-comment-list"><div><div><div class="top"><span>2条评论</span> <a class="author-only">只看作者</a> <a class="close-btn" style="display: none;">关闭评论</a> <div class="pull-right"><a class="active">按喜欢排序</a><a class="">按时间正序</a><a class="">按时间倒序</a></div></div></div> <!----> <!----> <div class="comments-placeholder" style="display: none;"><div class="author"><div class="avatar"></div> <div class="info"><div class="name"></div> <div class="meta"></div></div></div> <div class="text"></div> <div class="text animation-delay"></div> <div class="tool-group"><i class="iconfont ic-zan-active"></i><div class="zan"></div> <i class="iconfont ic-list-comments"></i><div class="zan"></div></div></div> <div id="comment-12771127" class="comment"><div><div class="author"><a href="http://www.jianshu.com/u/45bedd902c76" target="_blank" class="avatar"><img src="./Android Studio NDK 开发与调试（生成 .so 文件） - 简书_files/35552405d712"></a> <div class="info"><a href="http://www.jianshu.com/u/45bedd902c76" target="_blank" class="name">qluojieq</a> <!----> <div class="meta"><span>2楼 · 2017.07.12 18:44</span></div></div></div> <div class="comment-wrap"><p>现在你看一下，这个文件还在这个位置吗，我的就没有ndk这个目录</p> <div class="tool-group"><a class=""><i class="iconfont ic-zan"></i> <span>赞</span></a> <a class=""><i class="iconfont ic-comment"></i> <span>回复</span></a> <a class="report"><span>举报</span></a> <!----></div></div></div> <div class="sub-comment-list"><div id="comment-12788557" class="sub-comment"><p><a href="http://www.jianshu.com/u/55b179b355c8" target="_blank">jarylan</a>：
+          <span>你要下载了 ndk 才会有哇 ！</span></p> <div class="sub-tool-group"><span>2017.07.13 09:34</span> <a class=""><i class="iconfont ic-comment"></i> <span>回复</span></a> <a class="report"><span>举报</span></a> <!----></div></div> <div class="sub-comment more-comment"><a class="add-comment-btn"><i class="iconfont ic-subcomment"></i> <span>添加新评论</span></a> <!----> <!----> <!----></div> <!----></div></div></div></div> <!----> <div><!----></div></div></div>
+  </div>
+
+  <div class="side-tool"><ul><li data-placement="left" data-toggle="tooltip" data-container="body" data-original-title="回到顶部" style=""><a class="function-button"><i class="iconfont ic-backtop"></i></a></li> <li data-placement="left" data-toggle="tooltip" data-container="body" data-original-title="将文章加入专题"><a class="js-submit-button"><i class="iconfont ic-addcollectionmodal"></i></a> <!----></li> <li data-placement="left" data-toggle="tooltip" data-container="body" data-original-title="收藏文章"><a class="function-button"><i class="iconfont ic-mark"></i></a></li> <li data-placement="left" data-toggle="tooltip" data-container="body" data-original-title="分享文章"><a tabindex="0" role="button" data-toggle="popover" data-placement="left" data-html="true" data-trigger="focus" href="javascript:void(0);" data-content="&lt;ul class=&#39;share-list&#39;&gt;
+                &lt;li&gt;&lt;a class=&quot;weixin-share&quot;&gt;&lt;i class=&quot;social-icon-sprite social-icon-weixin&quot;&gt;&lt;/i&gt;&lt;span&gt;分享到微信&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href=&quot;javascript:void((function(s,d,e,r,l,p,t,z,c){var%20f=&#39;http://v.t.sina.com.cn/share/share.php?appkey=1881139527&#39;,u=z||d.location,p=[&#39;&amp;url=&#39;,e(u),&#39;&amp;title=&#39;,e(t||d.title),&#39;&amp;source=&#39;,e(r),&#39;&amp;sourceUrl=&#39;,e(l),&#39;&amp;content=&#39;,c||&#39;gb2312&#39;,&#39;&amp;pic=&#39;,e(p||&#39;&#39;)].join(&#39;&#39;);function%20a(){if(!window.open([f,p].join(&#39;&#39;),&#39;mb&#39;,[&#39;toolbar=0,status=0,resizable=1,width=440,height=430,left=&#39;,(s.width-440)/2,&#39;,top=&#39;,(s.height-430)/2].join(&#39;&#39;)))u.href=[f,p].join(&#39;&#39;);};if(/Firefox/.test(navigator.userAgent))setTimeout(a,0);else%20a();})(screen,document,encodeURIComponent,&#39;&#39;,&#39;&#39;,&#39;http://cwb.assets.jianshu.io/notes/images/7454722/weibo/image_d887e79c6717.jpg&#39;, &#39;推荐 jarylan 的文章《Android Studio NDK 开发与调试（生成 .so 文件）》（ 分享自 @简书 ）&#39;,&#39;http://www.jianshu.com/p/e7c2c63fa70e?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=reader_share&amp;utm_source=weibo&#39;,&#39;页面编码gb2312|utf-8默认gb2312&#39;));&quot;&gt;&lt;i class=&#39;social-icon-sprite social-icon-weibo&#39;&gt;&lt;/i&gt;&lt;span&gt;分享到微博&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href=&quot;http://cwb.assets.jianshu.io/notes/images/7454722/weibo/image_d887e79c6717.jpg&quot; target=&quot;_blank&quot;&gt;&lt;i class=&quot;social-icon-sprite social-icon-picture&quot;&gt;&lt;/i&gt;&lt;span&gt;下载长微博图片&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href=&quot;javascript:void(function(){var d=document,e=encodeURIComponent,r=&#39;http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=&#39;+e(&#39;http://www.jianshu.com/p/e7c2c63fa70e?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=reader_share&amp;utm_source=qzone&#39;)+&#39;&amp;title=&#39;+e(&#39;推荐 jarylan 的文章《Android Studio NDK 开发与调试（生成 .so 文件）》&#39;),x=function(){if(!window.open(r,&#39;qzone&#39;,&#39;toolbar=0,resizable=1,scrollbars=yes,status=1,width=600,height=600&#39;))location.href=r};if(/Firefox/.test(navigator.userAgent)){setTimeout(x,0)}else{x()}})();&quot;&gt;&lt;i class=&#39;social-icon-sprite social-icon-zone&#39;&gt;&lt;/i&gt;&lt;span&gt;分享到QQ空间&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href=&quot;javascript:void(function(){var d=document,e=encodeURIComponent,r=&#39;https://twitter.com/share?url=&#39;+e(&#39;http://www.jianshu.com/p/e7c2c63fa70e?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=reader_share&amp;utm_source=twitter&#39;)+&#39;&amp;text=&#39;+e(&#39;推荐 jarylan 的文章《Android Studio NDK 开发与调试（生成 .so 文件）》（ 分享自 @jianshucom ）&#39;)+&#39;&amp;related=&#39;+e(&#39;jianshucom&#39;),x=function(){if(!window.open(r,&#39;twitter&#39;,&#39;toolbar=0,resizable=1,scrollbars=yes,status=1,width=600,height=600&#39;))location.href=r};if(/Firefox/.test(navigator.userAgent)){setTimeout(x,0)}else{x()}})();&quot;&gt;&lt;i class=&#39;social-icon-sprite social-icon-twitter&#39;&gt;&lt;/i&gt;&lt;span&gt;分享到Twitter&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href=&quot;javascript:void(function(){var d=document,e=encodeURIComponent,r=&#39;https://www.facebook.com/dialog/share?app_id=483126645039390&amp;display=popup&amp;href=http://www.jianshu.com/p/e7c2c63fa70e?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=reader_share&amp;utm_source=facebook&#39;,x=function(){if(!window.open(r,&#39;facebook&#39;,&#39;toolbar=0,resizable=1,scrollbars=yes,status=1,width=450,height=330&#39;))location.href=r};if(/Firefox/.test(navigator.userAgent)){setTimeout(x,0)}else{x()}})();&quot;&gt;&lt;i class=&#39;social-icon-sprite social-icon-facebook&#39;&gt;&lt;/i&gt;&lt;span&gt;分享到Facebook&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href=&quot;javascript:void(function(){var d=document,e=encodeURIComponent,r=&#39;https://plus.google.com/share?url=&#39;+e(&#39;http://www.jianshu.com/p/e7c2c63fa70e?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=reader_share&amp;utm_source=google_plus&#39;),x=function(){if(!window.open(r,&#39;google_plus&#39;,&#39;toolbar=0,resizable=1,scrollbars=yes,status=1,width=450,height=330&#39;))location.href=r};if(/Firefox/.test(navigator.userAgent)){setTimeout(x,0)}else{x()}})();&quot;&gt;&lt;i class=&#39;social-icon-sprite social-icon-google&#39;&gt;&lt;/i&gt;&lt;span&gt;分享到Google+&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href=&quot;javascript:void(function(){var d=document,e=encodeURIComponent,s1=window.getSelection,s2=d.getSelection,s3=d.selection,s=s1?s1():s2?s2():s3?s3.createRange().text:&#39;&#39;,r=&#39;http://www.douban.com/recommend/?url=&#39;+e(&#39;http://www.jianshu.com/p/e7c2c63fa70e?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=reader_share&amp;utm_source=douban&#39;)+&#39;&amp;title=&#39;+e(&#39;Android Studio NDK 开发与调试（生成 .so 文件）&#39;)+&#39;&amp;sel=&#39;+e(s)+&#39;&amp;v=1&#39;,x=function(){if(!window.open(r,&#39;douban&#39;,&#39;toolbar=0,resizable=1,scrollbars=yes,status=1,width=450,height=330&#39;))location.href=r+&#39;&amp;r=1&#39;};if(/Firefox/.test(navigator.userAgent)){setTimeout(x,0)}else{x()}})()&quot;&gt;&lt;i class=&#39;social-icon-sprite social-icon-douban&#39;&gt;&lt;/i&gt;&lt;span&gt;分享到豆瓣&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+              &lt;/ul&gt;" data-original-title="" title="" class="function-button"><i class="iconfont ic-share"></i></a> <!----></li></ul></div>
+</div>
+<div class="note-bottom">
+  <div><div class="main"><div class="title">被以下专题收入，发现更多相似内容</div> <!----> <div class="include-collection"><div class="modal-wrap add-collection-wrap"><a class="add-collection"><i class="iconfont ic-follow"></i>收入我的专题</a></div> <a href="http://www.jianshu.com/c/3fde3b545a35?utm_source=desktop&amp;utm_medium=notes-included-collection" target="_blank" class="item"><img src="./Android Studio NDK 开发与调试（生成 .so 文件） - 简书_files/android.graphics.Bitmap_3d178cba.jpeg"><div class="name">Android知识</div></a><a href="http://www.jianshu.com/c/NEt52a?utm_source=desktop&amp;utm_medium=notes-included-collection" target="_blank" class="item"><img src="./Android Studio NDK 开发与调试（生成 .so 文件） - 简书_files/computer_guy.jpg"><div class="name">程序员</div></a><a href="http://www.jianshu.com/c/d1591c322c89?utm_source=desktop&amp;utm_medium=notes-included-collection" target="_blank" class="item"><img src="./Android Studio NDK 开发与调试（生成 .so 文件） - 简书_files/android.graphics.Bitmap_15f127c2.jpeg"><div class="name">Android开发</div></a><a href="http://www.jianshu.com/c/f2e85f05ca8a?utm_source=desktop&amp;utm_medium=notes-included-collection" target="_blank" class="item"><img src="./Android Studio NDK 开发与调试（生成 .so 文件） - 简书_files/android-logo.png"><div class="name">Android 专栏</div></a><a href="http://www.jianshu.com/c/bDHhpK?utm_source=desktop&amp;utm_medium=notes-included-collection" target="_blank" class="item"><img src="./Android Studio NDK 开发与调试（生成 .so 文件） - 简书_files/首页投稿.png"><div class="name">首页投稿</div></a><a href="http://www.jianshu.com/c/a36448e9cfa8?utm_source=desktop&amp;utm_medium=notes-included-collection" target="_blank" class="item"><img src="./Android Studio NDK 开发与调试（生成 .so 文件） - 简书_files/images_1.png"><div class="name">Android</div></a><a href="http://www.jianshu.com/c/4aabcf53f8e9?utm_source=desktop&amp;utm_medium=notes-included-collection" target="_blank" class="item"><img src="./Android Studio NDK 开发与调试（生成 .so 文件） - 简书_files/android001.jpg"><div class="name">Android...</div></a> <a class="show-more">
+        展开更多
+        <i class="iconfont ic-show"></i></a></div></div> <!----> <!----></div>
+  <div data-vcomp="recommended-notes" data-note-id="7454722"></div>
+</div>
+
+    <script src="./Android Studio NDK 开发与调试（生成 .so 文件） - 简书_files/push.js.下载"></script><script src="./Android Studio NDK 开发与调试（生成 .so 文件） - 简书_files/hm.js.下载"></script><script async="" src="./Android Studio NDK 开发与调试（生成 .so 文件） - 简书_files/analytics.js.下载"></script><script type="application/json" data-name="page-data">{"user_signed_in":true,"locale":"zh-CN","os":"windows","read_mode":"day","read_font":"font2","current_user":{"id":3763397,"nickname":"At攻城狮","slug":"50fde98da15e","avatar":"http://upload.jianshu.io/users/upload_avatars/3763397/ecabe6dd-fd9f-40db-b6a4-46b0bdff2a42.png","unread_counts":{"chats":2,"likes":2,"follows":2,"others":12,"total":18},"has_editable_collection":true},"note_show":{"is_author":false,"is_following_author":false,"is_liked_note":false,"uuid":"8ecd267c-bf8c-440b-b7ea-3197bc5c739d"},"note":{"id":7454722,"slug":"e7c2c63fa70e","user_id":3878387,"notebook_id":8035677,"commentable":true,"likes_count":15,"views_count":5385,"public_wordage":820,"comments_count":2,"total_rewards_count":0,"is_author":false,"author":{"nickname":"jarylan","total_wordage":2915,"followers_count":24,"total_likes_count":56}}}</script>
+    
+    <script src="./Android Studio NDK 开发与调试（生成 .so 文件） - 简书_files/babel-polyfill-edd4242643dcecaa8f83.js.下载"></script>
+    <script src="./Android Studio NDK 开发与调试（生成 .so 文件） - 简书_files/web-base-e4c0b63e25c3fd5f4ef2.js.下载"></script>
+<script src="./Android Studio NDK 开发与调试（生成 .so 文件） - 简书_files/web-309e934c90c3eca2ebfd.js.下载"></script>
+    
+    <script src="./Android Studio NDK 开发与调试（生成 .so 文件） - 简书_files/entry-acbb21a5e019e27157d6.js.下载"></script>
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-35169517-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?0c0e9d9b1e7d617b3e6842e85b9fb068";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+<script>
+  (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+          bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      }
+      else {
+          bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+  })();
+</script>
+
+  
+
+<!----><!----><!----></body></html>
