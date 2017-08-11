@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/DDing/DDing.iml" filepath="$PROJECT_DIR$/DDing/DDing.iml" />
       <module fileurl="file://$PROJECT_DIR$/DesTest/DesTest.iml" filepath="$PROJECT_DIR$/DesTest/DesTest.iml" />
       <module fileurl="file://$PROJECT_DIR$/DevelopTrainDemo.iml" filepath="$PROJECT_DIR$/DevelopTrainDemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/DiskCacheDemo/DiskCacheDemo.iml" filepath="$PROJECT_DIR$/DiskCacheDemo/DiskCacheDemo.iml" />
