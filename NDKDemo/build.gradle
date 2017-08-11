@@ -5,7 +5,7 @@ android {
     buildToolsVersion "26.0.1"
 
     defaultConfig {
-        applicationId "xwc.com.ndkdemo"
+        applicationId "xwc.com.xwc.com.ndkdemo"
         minSdkVersion 15
         targetSdkVersion 26
         versionCode 1
@@ -24,9 +24,9 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
-        debug {
-            jniDebuggable true //此句不加在真机上 debug 不受影响，但是在虚拟机上不能 debug
-        }
+//        debug {
+//            jniDebuggable true //此句不加在真机上 debug 不受影响，但是在虚拟机上不能 debug
+//        }
     }
 }
 

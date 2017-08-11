@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("xwc.com.ndkdemo", appContext.getPackageName());
+        assertEquals("xwc.com.xwc.com.ndkdemo", appContext.getPackageName());
     }
 }

@@ -15,6 +15,14 @@ extern "C" {
 JNIEXPORT jstring JNICALL Java_xwc_com_ndkdemo_JniTest_getString
   (JNIEnv *, jobject);
 
+/*
+ * Class:     xwc_com_ndkdemo_JniTest
+ * Method:    plus
+ * Signature: (II)I
+ */
+JNIEXPORT jint JNICALL Java_xwc_com_ndkdemo_JniTest_plus
+  (JNIEnv *, jobject, jint, jint);
+
 #ifdef __cplusplus
 }
 #endif
