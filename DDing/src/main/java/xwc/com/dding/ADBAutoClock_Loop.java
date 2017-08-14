@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Random;
 import java.util.Timer;
@@ -12,13 +13,16 @@ import java.util.TimerTask;
 
 public class ADBAutoClock_Loop {
 
-    private static String DDingTime = "11-19-39"; // 天-小时-分钟
+    private static String DDingTime = "8-40"; // 小时-分钟
     private static int clockTime;
-    private final static int randomSpace = 10;
-    private final static int period = 1 * 60 * 1000;
+    private final static int randomSpace = 5;
+    private final static int period = 2 * 60 * 1000;
 
     private static final int MAX_NUM = 5;
     private static int displayNum = 0;
+
+    private static SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+    private static Calendar clockCalendar;
 
     public static void main(String[] args) {
         Random random = new Random();
@@ -31,6 +35,11 @@ public class ADBAutoClock_Loop {
             clockTime -= random.nextInt(randomSpace);
         }
         System.out.println("clockTime：" + clockTime);
+
+        clockCalendar = Calendar.getInstance();
+        clockCalendar.setTime(new Date());
+        clockCalendar.add(clockCalendar.DATE,1);//把日期往后增加一天.整数往后推,负数往前移动
+
         Timer displayTimer = new Timer();
         displayTimer.schedule(new DisplyTask(), 1000, period);
 
@@ -39,8 +48,12 @@ public class ADBAutoClock_Loop {
     static class DisplyTask extends TimerTask {
         public void run() {
             int currentTime = getCurrentTime();
-            System.out.println("DisplyTask CurrentTime：" + currentTime);
-            if (currentTime >= clockTime) {
+            Calendar currentCalendar = Calendar.getInstance();
+            System.out.println("DisplyTask CurrentTime：" + currentTime
+                        + "\nclockCalendar: " + format.format(clockCalendar.getTime()));
+
+            if (format.format(currentCalendar.getTime()).equals(format.format(clockCalendar.getTime()))
+                    && currentTime >= clockTime) {
                 System.out.println("Do DisplyTask");
                 //启动叮叮
                 try {
@@ -79,10 +92,10 @@ public class ADBAutoClock_Loop {
     }
 
     /**
-     * @return ddHHmm
+     * @return HHmm
      */
     public static int getCurrentTime() {
-        SimpleDateFormat formatter = new SimpleDateFormat("ddHHmm");
+        SimpleDateFormat formatter = new SimpleDateFormat("HHmm");
         Date curDate = new Date(System.currentTimeMillis());//获取当前时间
         String str = formatter.format(curDate);
         return Integer.parseInt(str);

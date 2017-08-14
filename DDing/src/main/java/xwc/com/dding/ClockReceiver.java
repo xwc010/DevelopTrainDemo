@@ -16,7 +16,7 @@ import java.util.Date;
 
 public class ClockReceiver extends BroadcastReceiver {
 
-    public final static int ClockTime = 845; // 小时 分钟
+    public final static int ClockTime = 850; // 小时 分钟
     private SimpleDateFormat dateFormat = new SimpleDateFormat("yyMMdd");
 
     @Override

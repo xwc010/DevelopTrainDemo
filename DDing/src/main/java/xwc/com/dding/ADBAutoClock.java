@@ -7,34 +7,46 @@ import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class ADBAutoClock {
 
-    private static String dataStr = "11-19-27"; // "日-小时-分"
+    private static SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+    private static String dataStr = "8-45"; // "小时-分"
+    private final static int randomSpace = 5;
 
     public static void main(String[] args) {
 
         String[] dataArray = dataStr.split("-");
+        int hour = Integer.parseInt(dataArray[0]);
+        int minute = Integer.parseInt(dataArray[1]);
 
-        int day = Integer.parseInt(dataArray[0]);
-        int hour = Integer.parseInt(dataArray[1]);
-        int minute = Integer.parseInt(dataArray[2]);
+        Random random = new Random();
+        int b = random.nextInt(1);
 
-        display(new DisplayTask(), day, hour, minute);
-        display(new StopTask(), day, hour, minute + 1);
-        display(new DisplayTask(), day, hour, minute + 2);
-        display(new StopTask(), day, hour, minute + 3);
-        display(new DisplayTask(), day, hour, minute + 4);
+        if(b < 1){
+            minute += random.nextInt(randomSpace);
+        }else {
+            minute -= random.nextInt(randomSpace);
+        }
+
+        display(new DisplayTask(), hour, minute);
+        display(new StopTask(), hour, minute + 1);
+        display(new DisplayTask(), hour, minute + 2);
+        display(new StopTask(), hour, minute + 3);
+        display(new DisplayTask(), hour, minute + 4);
     }
 
-    private static void display(TimerTask timerTask, int day, int hour, int minute){
+    private static void display(TimerTask timerTask, int hour, int minute){
         Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.DAY_OF_MONTH, day);
+        calendar.setTime(new Date());
+        calendar.add(Calendar.DATE,1);//把日期往后增加一天.整数往后推,负数往前移动
         calendar.set(Calendar.HOUR_OF_DAY, hour);
         calendar.set(Calendar.MINUTE, minute);
         Date displayTime = calendar.getTime();
+        System.out.println("ADBAutoClock displayTime: " + format.format(displayTime));
         Timer dTimer = new Timer();
         dTimer.schedule(timerTask, displayTime);
     }
