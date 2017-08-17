@@ -14,7 +14,7 @@ import java.util.TimerTask;
 public class ADBAutoClock {
 
     private static SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-    private static String dataStr = "8-45"; // "小时-分"
+    private static String dataStr = "9-05"; // "小时-分"
     private final static int randomSpace = 5;
 
     public static void main(String[] args) {

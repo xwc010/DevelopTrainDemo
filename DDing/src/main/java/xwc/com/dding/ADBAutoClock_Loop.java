@@ -13,7 +13,7 @@ import java.util.TimerTask;
 
 public class ADBAutoClock_Loop {
 
-    private static String DDingTime = "8-40"; // 小时-分钟
+    private static String DDingTime = "9-02"; // 小时-分钟
     private static int clockTime;
     private final static int randomSpace = 5;
     private final static int period = 2 * 60 * 1000;
