@@ -24,9 +24,8 @@ public class ADBAutoClock {
         int minute = Integer.parseInt(dataArray[1]);
 
         Random random = new Random();
-        int b = random.nextInt(1);
-
-        if(b < 1){
+        boolean boo = (System.currentTimeMillis() % 2) > 0;
+        if(boo){
             minute += random.nextInt(randomSpace);
         }else {
             minute -= random.nextInt(randomSpace);

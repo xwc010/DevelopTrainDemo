@@ -25,11 +25,12 @@ public class ADBAutoClock_Loop {
     private static Calendar clockCalendar;
 
     public static void main(String[] args) {
-        Random random = new Random();
-        int b = random.nextInt(1);
 
         clockTime = Integer.parseInt(DDingTime.replace("-",""));
-        if(b < 1){
+        Random random = new Random();
+
+        boolean boo = (System.currentTimeMillis() % 2) > 0;
+        if(boo){
             clockTime += random.nextInt(randomSpace);
         }else {
             clockTime -= random.nextInt(randomSpace);

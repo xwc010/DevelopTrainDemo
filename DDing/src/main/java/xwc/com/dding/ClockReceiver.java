@@ -1,14 +1,20 @@
 package xwc.com.dding;
 
+import android.app.KeyguardManager;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.PowerManager;
 import android.util.Log;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Random;
 
 /**
  * Created by xwc on 2017/8/11.
@@ -16,8 +22,10 @@ import java.util.Date;
 
 public class ClockReceiver extends BroadcastReceiver {
 
-    public final static int ClockTime = 902; // 小时 分钟
+    Handler mHandler = new Handler(Looper.getMainLooper());
+    public final static int ClockTime = 905; // 小时 分钟
     private SimpleDateFormat dateFormat = new SimpleDateFormat("yyMMdd");
+    private final static int randomSpace = 3;
 
     @Override
     public void onReceive(final Context context, Intent intent) {
@@ -47,6 +55,17 @@ public class ClockReceiver extends BroadcastReceiver {
         // 打卡时间
         int ddTime = cache.getInt("ClockTime", ClockTime);
 
+        Random random = new Random();
+
+        boolean boo = (System.currentTimeMillis() % 2) > 0;
+        if(boo){
+            ddTime += random.nextInt(randomSpace);
+        }else {
+            ddTime -= random.nextInt(randomSpace);
+        }
+
+        Log.i("DDingClock", "ddTime: " + ddTime);
+
         String displayKey = "Display_"+dateFormat.format(new Date());
         Log.i("DDingClock", "displayKey: " + displayKey);
 
@@ -56,7 +75,14 @@ public class ClockReceiver extends BroadcastReceiver {
         // 当前时间
         int currentTime = ADBAutoClock.getCurrentTime();
 
-        if(displayNum < 3 && currentTime >= (ddTime + displayNum * 2)){
+        boolean isWorkDate = true; // 是否是工作日
+        Calendar c = Calendar.getInstance();
+        if(c.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY
+                || c.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY){
+            isWorkDate = false;
+        }
+
+        if(isWorkDate && displayNum < 3 && currentTime >= (ddTime + displayNum * 2)){
             displayNum ++;
             cache.edit().putInt(displayKey, displayNum).commit();
             Log.i("DDingClock", "needDisplay = true");
@@ -95,10 +121,32 @@ public class ClockReceiver extends BroadcastReceiver {
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
 
+                mHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        wakeUpAndUnlock(context);
+                    }
+                });
             } catch (Exception e) {
 
                 Log.e("nafio",e.getMessage());
             }
         }
     };
+
+    public void wakeUpAndUnlock(Context context){
+        Log.i("DDingClock", "Do wakeUpAndUnlock");
+        KeyguardManager km= (KeyguardManager) context.getSystemService(Context.KEYGUARD_SERVICE);
+        KeyguardManager.KeyguardLock kl = km.newKeyguardLock("unLock");
+        //解锁
+        kl.disableKeyguard();
+        //获取电源管理器对象
+        PowerManager pm=(PowerManager) context.getSystemService(Context.POWER_SERVICE);
+        //获取PowerManager.WakeLock对象,后面的参数|表示同时传入两个值,最后的是LogCat里用的Tag
+        PowerManager.WakeLock wl = pm.newWakeLock(PowerManager.ACQUIRE_CAUSES_WAKEUP | PowerManager.SCREEN_DIM_WAKE_LOCK,"bright");
+        //点亮屏幕
+        wl.acquire();
+        //释放
+        wl.release();
+    }
 }
