@@ -8,13 +8,13 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/BlueToothDemo" />
             <option value="$PROJECT_DIR$/DDing" />
             <option value="$PROJECT_DIR$/DesTest" />
             <option value="$PROJECT_DIR$/DiskCacheDemo" />
             <option value="$PROJECT_DIR$/NDKDemo" />
             <option value="$PROJECT_DIR$/PermissionDemo" />
             <option value="$PROJECT_DIR$/SocketClientDemo" />
+            <option value="$PROJECT_DIR$/SocketServerDemo" />
             <option value="$PROJECT_DIR$/ThreadPoolDemo" />
             <option value="$PROJECT_DIR$/WebViewDemo" />
           </set>

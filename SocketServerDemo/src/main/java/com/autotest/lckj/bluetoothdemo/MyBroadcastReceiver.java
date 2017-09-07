@@ -7,15 +7,6 @@ import android.net.Uri;
 import android.util.Log;
 import android.widget.Toast;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.DatagramPacket;
-import java.net.DatagramSocket;
-import java.net.ServerSocket;
-import java.net.Socket;
-import java.net.SocketException;
-
 /**
  * Created by ouyangxiangqing on 2017/8/14.
  */
@@ -37,7 +28,7 @@ public class MyBroadcastReceiver extends BroadcastReceiver {
             context.startActivity(phoneIntent);
         }
         else if(intent.getAction().equals(BLUETTOTH_INTENT)){
-            Toast.makeText(context,"收到开关蓝牙的广播:"+MyService.ip +MyService.isOpenBt+MyService.isRun,Toast.LENGTH_LONG).show();
+            Toast.makeText(context,"收到开关蓝牙的广播",Toast.LENGTH_LONG).show();
             Intent i = new Intent(OPEN_BT);
             i.putExtra("ip",intent.getStringExtra("ip"));
             i.putExtra("isOpen", intent.getBooleanExtra("isOpen", false));

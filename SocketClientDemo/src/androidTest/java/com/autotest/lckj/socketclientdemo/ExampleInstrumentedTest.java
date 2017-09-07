@@ -1,4 +1,4 @@
-package com.lckj.autotest.socketclientdemo;
+package com.autotest.lckj.socketclientdemo;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.lckj.autotest.socketclientdemo", appContext.getPackageName());
+        assertEquals("com.autotest.lckj.socketclientdemo", appContext.getPackageName());
     }
 }

@@ -1,4 +1,4 @@
-package com.lckj.autotest.socketclientdemo;
+package com.autotest.lckj.socketclientdemo;
 
 import org.junit.Test;
 

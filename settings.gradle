@@ -1,1 +1,1 @@
-include ':DesTest', ':DiskCacheDemo', ':ThreadPoolDemo', ':WebViewDemo', ':NDKDemo', ':DDing', ':PermissionDemo', ':BlueToothDemo', ':SocketClientDemo'
+include ':DesTest', ':DiskCacheDemo', ':ThreadPoolDemo', ':WebViewDemo', ':NDKDemo', ':DDing', ':PermissionDemo', ':SocketClientDemo', ':SocketServerDemo'
