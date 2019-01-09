@@ -1,1 +1,1 @@
-include ':DesTest', ':DiskCacheDemo', ':ThreadPoolDemo', ':WebViewDemo', ':NDKDemo', ':DDing', ':PermissionDemo', ':SocketClientDemo', ':SocketServerDemo'
+include ':DesTest', ':DiskCacheDemo', ':ThreadPoolDemo', ':WebViewDemo', ':NDKDemo', ':DDing', ':PermissionDemo', ':SocketServerDemo', ':SocketClientDemo', ':AndroidNewFeatures'

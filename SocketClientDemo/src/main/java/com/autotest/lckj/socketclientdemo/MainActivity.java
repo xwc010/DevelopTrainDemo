@@ -1,13 +1,20 @@
 package com.autotest.lckj.socketclientdemo;
 
+import android.Manifest;
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -26,9 +33,10 @@ public class MainActivity extends AppCompatActivity {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
         }
+        openPermissions();
         findViewById();
 
-        IntentFilter intentFilter = new IntentFilter("com.lckj.autotest.USER_ACTION");
+        IntentFilter intentFilter = new IntentFilter(G.USER_ACTION);
         registerReceiver(mReceiver, intentFilter);
     }
 
@@ -53,7 +61,24 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 if (btn_connect.getText().toString().equals("已连接")){
-                    Toast.makeText(MainActivity.this, "已连接服务器",Toast.LENGTH_LONG).show();;
+                    Dialog dialog=new AlertDialog.Builder(MainActivity.this)
+                            .setTitle("询问框")
+                            .setMessage("确定断开与服务器连接吗？")
+                            .setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Intent i = new Intent(G.DISCONNECT);
+                                    sendBroadcast(i);
+
+                                    btn_connect.setText("连接服务器");
+                                }
+                            })
+                            .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            })
+                            .create();
+                    dialog.show();
                     return;
                 }
 
@@ -70,7 +95,6 @@ public class MainActivity extends AppCompatActivity {
         public void onReceive(Context context, Intent intent) {
             //刷新主Activity界面
             btn_connect.setText("已连接");
-            btn_connect.setClickable(false);
 
             SharedPreferences sharedPreferences = context.getSharedPreferences("test",Activity.MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -81,7 +105,23 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
         unregisterReceiver(mReceiver);
+        super.onDestroy();
     }
+
+    private void openPermissions(){
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE)  //拨打电话
+                != PackageManager.PERMISSION_GRANTED ||
+                ContextCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_ADMIN)   //蓝牙管理
+                        != PackageManager.PERMISSION_GRANTED ||
+                ContextCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH)  //蓝牙
+                        != PackageManager.PERMISSION_GRANTED||
+                ContextCompat.checkSelfPermission(this, Manifest.permission.INTERNET)  //网络
+                != PackageManager.PERMISSION_GRANTED) {
+            //申请权限
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CALL_PHONE,Manifest.permission.BLUETOOTH_ADMIN,Manifest.permission.BLUETOOTH
+                            ,Manifest.permission.INTERNET},
+                    1);}
+    }
+
 }
